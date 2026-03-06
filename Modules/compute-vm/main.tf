@@ -1,13 +1,23 @@
 terraform {
-  required_version = ">= 1.4.0"
   required_providers {
-    null = {
-      source  = "hashicorp/null"
-      version = "~> 3.0"
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "~>3.0"
     }
   }
 }
 
-provider "null" {}
+provider "azurerm" {
+  features {}
 
-resource "null_resource" "example" {}
+  subscription_id = "<ton_subscription_id>"
+  tenant_id       = "<ton_tenant_id>"
+  client_id       = "<ton_client_id>"
+  client_secret   = "<ton_client_secret>"
+}
+
+
+resource "azurerm_resource_group" "example" {
+  name     = "rg-cyberlia"
+  location = "canadacentral"  
+}
